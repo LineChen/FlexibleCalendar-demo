@@ -31,6 +31,7 @@ public class CalendarListActivity extends ActionBarActivity implements CalendarL
         calendarList.add("Calendar 4");
         calendarList.add("Calendar 5");
         calendarList.add("Calendar 6");
+        calendarList.add("MonthCalendarActivity");
 
         CalendarListAdapter adatper = new CalendarListAdapter(calendarList);
         adatper.setCalendarTypeClickListener(this);
@@ -66,6 +67,11 @@ public class CalendarListActivity extends ActionBarActivity implements CalendarL
             case 5:
                 Intent calActivity6 = new Intent(this,CalendarActivity6.class);
                 startActivity(calActivity6);
+                break;
+
+            case 6:
+                Intent calActivity7 = new Intent(this,MonthCalendarActivity.class);
+                startActivity(calActivity7);
                 break;
 
             default:

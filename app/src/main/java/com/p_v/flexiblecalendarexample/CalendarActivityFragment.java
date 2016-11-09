@@ -55,12 +55,12 @@ public class CalendarActivityFragment extends Fragment implements FlexibleCalend
                 }
 
                 if(cellType ==BaseCellView.TODAY){
-                    cellView.setTextColor(getResources().getColor(R.color.colorAccent));
+                    cellView.setTextColor(getResources().getColor(R.color.accent));
                 }
 
                 if(cellType == BaseCellView.OUTSIDE_MONTH){
                     //这个界面中其他月份的日期
-                    cellView.setTextColor(getResources().getColor(R.color.colorAccent));
+                    cellView.setTextColor(getResources().getColor(R.color.accent));
                 }
                 return cellView;
             }

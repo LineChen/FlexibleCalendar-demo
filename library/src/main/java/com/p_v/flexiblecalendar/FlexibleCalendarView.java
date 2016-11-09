@@ -77,7 +77,7 @@ public class FlexibleCalendarView extends LinearLayout implements
      * Event Data Provider used for displaying events for a particular date
      */
     public interface EventDataProvider {
-        List<? extends Event> getEventsForTheDay(int year,int month, int day);
+        List<? extends Event> getEventsForTheDay(int year, int month, int day);
     }
 
     /**
@@ -103,7 +103,7 @@ public class FlexibleCalendarView extends LinearLayout implements
          * @param month selected month
          * @param year selected year
          */
-        void onDateClick(int year,int month, int day);
+        void onDateClick(int year, int month, int day);
     }
 
     /**
@@ -170,18 +170,18 @@ public class FlexibleCalendarView extends LinearLayout implements
     private EventDataProvider eventDataProvider;
     private CalendarView calendarView;
 
-    private int displayYear;
-    private int displayMonth;
-    private int startDisplayDay;
-    private int weekdayHorizontalSpacing;
-    private int weekdayVerticalSpacing;
-    private int monthDayHorizontalSpacing;
-    private int monthDayVerticalSpacing;
-    private int monthViewBackground;
-    private int weekViewBackground;
-    private boolean showDatesOutsideMonth;
-	private boolean decorateDatesOutsideMonth;
-    private boolean disableAutoDateSelection;
+        private int displayYear;
+        private int displayMonth;
+        private int startDisplayDay;
+        private int weekdayHorizontalSpacing;
+        private int weekdayVerticalSpacing;
+        private int monthDayHorizontalSpacing;
+        private int monthDayVerticalSpacing;
+        private int monthViewBackground;
+        private int weekViewBackground;
+        private boolean showDatesOutsideMonth;
+        private boolean decorateDatesOutsideMonth;
+        private boolean disableAutoDateSelection;
 
     /**
      * Reset adapters flag used internally
@@ -266,7 +266,7 @@ public class FlexibleCalendarView extends LinearLayout implements
         //Initializing with the offset value
         lastPosition = monthInfPagerAdapter.getRealCount() * 100;
         monthViewPager.setAdapter(monthInfPagerAdapter);
-        monthViewPager.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        monthViewPager.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         monthViewPager.addOnPageChangeListener(new MonthChangeListener());
 
@@ -275,7 +275,7 @@ public class FlexibleCalendarView extends LinearLayout implements
         monthViewPagerAdapter.setSelectedItem(selectedDateItem);
 
         this.addView(monthViewPager);
-    }
+    } 
 
     private void setAttributes(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.FlexibleCalendarView);
@@ -646,7 +646,11 @@ public class FlexibleCalendarView extends LinearLayout implements
         weekDisplayView.setVerticalSpacing(weekdayVerticalSpacing);
     }
 
-    public void setWeekViewVerticalVisible(boolean visible){
+    /**
+     * Set the weekview header visibility
+     * @param visible
+     */
+    public void setWeekViewVisibility(boolean visible){
         weekDisplayView.setVisibility(visible ? VISIBLE : GONE);
     }
 
@@ -794,6 +798,10 @@ public class FlexibleCalendarView extends LinearLayout implements
         this.disableAutoDateSelection = disableAutoDateSelection;
         monthViewPager.invalidate();
         monthViewPagerAdapter.setDisableAutoDateSelection(disableAutoDateSelection);
+    }
+
+    public void setMonthViewScrollable(boolean canScroll){
+        monthViewPager.setCanScroll(canScroll);
     }
 
     /**

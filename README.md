@@ -130,4 +130,3 @@ Disable auto date selection on month change by using `FlexibleCalendarView#disab
         android:drawable="@drawable/cell_blue_background"/>
 </selector>
 ```
-# FlexibleCalendar-demo 

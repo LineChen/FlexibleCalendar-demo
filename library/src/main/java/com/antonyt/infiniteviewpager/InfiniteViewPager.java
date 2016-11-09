@@ -5,12 +5,16 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * A {@link ViewPager} that allows pseudo-infinite paging with a wrap-around effect. Should be used with an {@link
  * InfinitePagerAdapter}.
  */
 public class InfiniteViewPager extends ViewPager {
+
+    private boolean isCanScroll = true;
 
     public InfiniteViewPager(Context context) {
         super(context);
@@ -27,9 +31,9 @@ public class InfiniteViewPager extends ViewPager {
         setCurrentItem(0);
     }
 
-    public void setAdapter(PagerAdapter adapter, int lastPosition){
+    public void setAdapter(PagerAdapter adapter, int lastPosition) {
         super.setAdapter(adapter);
-        super.setCurrentItem(lastPosition,false);
+        super.setCurrentItem(lastPosition, false);
     }
 
     @Override
@@ -78,4 +82,56 @@ public class InfiniteViewPager extends ViewPager {
             return 0;
         }
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        int height = 0;
+        //下面遍历所有child的高度
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            child.measure(widthMeasureSpec,
+                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            int h = child.getMeasuredHeight();
+            if (h > height) //采用最大的view的高度。
+                height = h;
+        }
+
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,
+                MeasureSpec.EXACTLY);
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public void setCanScroll(boolean canScroll) {
+        isCanScroll = canScroll;
+    }
+
+//    @Override
+//    public void scrollTo(int x, int y) {
+//        if(isCanScroll){
+//            super.scrollTo(x, y);
+//        }
+//    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (isCanScroll) {
+            return super.onTouchEvent(event);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        if (isCanScroll) {
+            return super.onInterceptTouchEvent(event);
+        } else {
+            return false;
+        }
+
+    }
+
+
 }

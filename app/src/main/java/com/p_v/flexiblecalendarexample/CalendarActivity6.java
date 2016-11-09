@@ -25,7 +25,7 @@ public class CalendarActivity6 extends AppCompatActivity {
         setContentView(R.layout.activity_calendar6);
 
         calendarView = (FlexibleCalendarView) findViewById(R.id.calendar_view);
-        calendarView.setWeekViewVerticalVisible(false);
+        calendarView.setWeekViewVisibility(false);
 
         calendarView.setCalendarView(new FlexibleCalendarView.CalendarView() {
             @Override
@@ -37,14 +37,14 @@ public class CalendarActivity6 extends AppCompatActivity {
                 }
 
                 if(cellType ==BaseCellView.TODAY){
-                    cellView.setTextColor(getResources().getColor(R.color.colorAccent));
+                    cellView.setTextColor(getResources().getColor(R.color.accent));
                 } else {
                     cellView.setTextColor(Color.BLACK);
                 }
 
                 if(cellType == BaseCellView.OUTSIDE_MONTH){
                     //这个界面中其他月份的日期
-                    cellView.setTextColor(getResources().getColor(R.color.colorAccent));
+                    cellView.setTextColor(getResources().getColor(R.color.accent));
                 }
                 return cellView;
             }

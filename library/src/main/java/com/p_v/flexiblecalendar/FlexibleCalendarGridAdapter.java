@@ -226,7 +226,7 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
     }
 
     interface MonthEventFetcher {
-        List<? extends Event> getEventsForTheDay(int year,int month,int day);
+        List<? extends Event> getEventsForTheDay(int year, int month, int day);
     }
 
     public void setOnDateClickListener(OnDateCellItemClickListener onDateCellItemClickListener){
@@ -251,6 +251,10 @@ class FlexibleCalendarGridAdapter extends BaseAdapter {
 
     public void setCellViewDrawer(IDateCellViewDrawer cellViewDrawer){
         this.cellViewDrawer = cellViewDrawer;
+    }
+
+    public IDateCellViewDrawer getCellViewDrawer() {
+        return cellViewDrawer;
     }
 
     public void setShowDatesOutsideMonth(boolean showDatesOutsideMonth){
