@@ -196,6 +196,24 @@ public class MonthCalendarView extends LinearLayout implements FlexibleCalendarG
         adapter.getCellViewDrawer().setCalendarView(calendarView);
     }
 
+    /**
+     * 设置显示年月
+     * @param year
+     * @param month
+     */
+    public void setStartDisplay(int year,int month){
+        this.displayYear = year;
+        this.displayMonth = month - 1;
+        initAdapter(getContext());
+        monthGridView.setAdapter(adapter);
+    }
+
+    public void refresh(){
+        requestLayout();
+        invalidate();
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public List<? extends Event> getEventsForTheDay(int year, int month, int day) {
